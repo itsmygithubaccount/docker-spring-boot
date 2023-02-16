@@ -6,7 +6,29 @@
 * Docker Desktopをインストール済み
 * Gradle コマンドを実行できる
 
-## Dockerイメージの作成方法
+## 事前準備
+このリポジトリをクローンします。
+
+    git clone https://github.com/Ryunosuke1998/docker-spring-boot.git
+
+
+
+
+### ソースを変更した際はビルド→イメージ作成をし直す。
+下記コマンドを実行する。
+
+    ./gradlew build
+    ./gradlew build docker
+
+これで、Dockerイメージが作成されます。Docker Desktopでイメージを確認します。"▶"ボタンでコンテナを起動できます。
+起動時の設定をするダイアログが表示されるので、[host port]に8080を設定しましょう。
+
+[http://localhost:8080/]にアクセスします。
+"Hello World!!"を表示されることを確認します。
+
+
+## 補足
+### Dockerイメージの作成方法
 ### ルートディレクトリにDockerfileを作成し、下記内容を記載する。
     FROM openjdk:17-alpine
     VOLUME /tmp
@@ -18,8 +40,8 @@
 ※FROM openjdk:17-alpine
 はプロジェクトのJavaバージョンに合わせる
 
-### build.gradleに下記内容を追記する。
-※「// 追加」の部分
+### build.gradle
+※「// 追加」の部分がDockerまわりで必要な記述です。
 
     plugins {
         id 'java'
@@ -53,17 +75,5 @@
         files bootJar.archivePath
         buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
     }
-
-
-### ソースを変更した際はビルド→イメージ作成をし直す。
-下記コマンドを実行する。
-
-    ./gradlew build
-    ./gradlew build docker
-
-これで、Dockerイメージが作成されます。Docker Desktopでイメージを確認します。"▶"ボタンでコンテナを起動できます。
-起動時の設定をするダイアログが表示されるので、[host port]に8080を設定しましょう。
-
-ブラウザで[http://localhost:8080/]にアクセスしましょう。
 
 以上です。
