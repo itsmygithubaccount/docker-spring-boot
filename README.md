@@ -11,11 +11,8 @@
 
     git clone https://github.com/Ryunosuke1998/docker-spring-boot.git
 
-
-
-
 ### プロジェクトのビルド、Dockerイメージの作成
-下記コマンドを実行する。
+ルートディレクトリで下記コマンドを実行する。
 
     ./gradlew build
     ./gradlew build docker
